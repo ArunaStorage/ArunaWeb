@@ -55,7 +55,7 @@ export class ApiService {
   getProjects() {
     return new Promise(resolve => {
       this.http.get(this.gateway_url + "/projects", this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log("Get Projects...", res)
+        console.log("List of my Projects:", res)
         this.projects = res["projects"]
         resolve("done")
       })

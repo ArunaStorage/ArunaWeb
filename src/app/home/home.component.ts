@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
     this.project_table = new MatTableDataSource(this.apiService.projects)
     this.displayedColumns=["name", "description", "actions"]
-    console.log(this.project_table)
+    console.log("Project table object:",this.project_table)
   }
 
   ngOnInit(): void {

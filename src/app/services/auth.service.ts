@@ -60,12 +60,12 @@ export class AuthService {
       }
     });
     */
-    console.log("creating config and try login...")
+    
     this.oauthService.configure(this.config.auth_config)
     this.oauthService.setupAutomaticSilentRefresh()
     this.oauthService.tokenValidationHandler = new JwksValidationHandler()
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-      console.log("getting user in config")
+      
       if (this.isUser()) {
         this.router.navigate(["/home"])
       }
@@ -82,8 +82,8 @@ export class AuthService {
   }
 
   isUser(): boolean {
-    console.log("Is User?...")
-    console.log(this.oauthService.hasValidAccessToken())
+    
+    
     if (this.oauthService.hasValidAccessToken()) {
       this.user_data = this.oauthService.getIdentityClaims()
       return true
