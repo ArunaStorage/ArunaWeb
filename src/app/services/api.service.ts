@@ -66,9 +66,9 @@ export class ApiService {
   createProject(new_project) {
     return new Promise(resolve => {
       var post_object = { name: new_project.name, description: new_project.description, metadata: new_project.metadata, labels: new_project.labels }
-      console.log(post_object)
+      console.log("New Project:", post_object)
       this.http.post(this.gateway_url + "/project/createproject", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
+        //console.log(res)
         resolve("")
       })
     })
@@ -79,7 +79,7 @@ export class ApiService {
   deleteProject(projcet_id) {
     return new Promise(resolve => {
       this.http.get(this.gateway_url + "/project/" + projcet_id + "/delete", this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
+        //console.log(res)
         resolve("done")
       })
     })
@@ -89,7 +89,7 @@ export class ApiService {
   viewSingleProject(id) {
     return new Promise(resolve => {
       this.http.get(this.gateway_url + "/project/" + id, this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)       
+        console.log("Project Information:", res)       
         this.project.project = res["project"]
         resolve(res["project"])
       })
@@ -100,7 +100,7 @@ export class ApiService {
   getDatasetsforProject(id) {
     return new Promise(resolve => {
       this.http.get(this.gateway_url + "/project/" + id + "/projectdatasets", this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
+        console.log("List of my Datasets:", res)
         var formated_res = res["datasets"].map(v => Object.assign(v, { 
           status: v.status.split("_")[1].toLowerCase().charAt(0).toUpperCase() 
           + v.status.split("_")[1].toLowerCase().slice(1)  
@@ -127,7 +127,6 @@ export class ApiService {
   getApiKeys() {
     return new Promise(resolve => {
       this.http.get(this.gateway_url + "/apitoken", this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
         this.apiKeys = res["token"]
         resolve("done")
       })
@@ -162,9 +161,9 @@ export class ApiService {
   createDataset(new_dataset) {
     return new Promise(resolve => {
       var post_object = { name: new_dataset.name, description: new_dataset.description, projectId: this.project.project["id"], metadata: new_dataset.metadata, labels: new_dataset.labels }
-      console.log(post_object)
+      console.log("New Dataset:", post_object)
       this.http.post(this.gateway_url + "/dataset/create", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
+        //console.log(res)
         resolve("")
       })
     })
@@ -174,7 +173,7 @@ export class ApiService {
   deleteDataset(dataset_id) {
     return new Promise(resolve => {
       this.http.delete(this.gateway_url + "/dataset/" + dataset_id, this.configureHeadersAccessKey()).pipe().subscribe(res_added => {
-        console.log(res_added)
+        //console.log(res_added)
         resolve("done")
       })
     })
@@ -197,7 +196,7 @@ export class ApiService {
     return new Promise(resolve => {
       var post_object = { id: element.id }
     this.http.post(this.gateway_url + "/datasetversions/list", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
-      console.log(res)
+      console.log("List of Versions:", res)
       this.datasetVersions = res["datasetVersions"]
       this.dataset = element
       resolve("")
@@ -339,13 +338,13 @@ export class ApiService {
   //Executes a http request to get all object groups of a dataset with pagination and exectues formatObjGroup
   viewObjectGroups(element) {
     return new Promise(resolve => {
-      console.log(this.paginantor_config)
+      //console.log(this.paginantor_config)
       var post_object = { id: element.id, pageRequest: { lastUuid: "", pageSize: this.paginantor_config.pagesize.toString() } }
       if (this.paginantor_config.activepage > 0) {
         post_object.pageRequest.lastUuid = this.paginantor_config.lastIds[this.paginantor_config.activepage - 1]
       }
       this.http.post(this.gateway_url + "/dataset/list", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
+        console.log("List of my Objects Groups:", res)
         this.formatObjGroup(res["objectGroups"]).then(_ => {
           resolve("")
         })
@@ -359,7 +358,6 @@ export class ApiService {
   getObjectGroup(id){
     return new Promise(resolve => {
       var post_object = { id: id }
-      console.log(post_object)
       this.http.post(this.gateway_url + "/objectgroup/get", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
         var formated_res = Object.assign(res["objectGroup"], { 
           created: res["objectGroup"]["objects"][0].created,
@@ -382,9 +380,7 @@ export class ApiService {
   getObjectGroupPagination(element) {
     return new Promise(resolve => {
       var post_obj = { id: element.id }
-      console.log(post_obj)
       this.http.post(this.gateway_url + "/dataset/list", post_obj, this.configureHeadersAccessKey()).pipe().subscribe(res => {
-        console.log(res)
 
         this.paginantor_config.stats.groupscount = res["objectGroups"].length
         this.paginantor_config.stats.objectscount = 0
@@ -398,7 +394,7 @@ export class ApiService {
             this.paginantor_config.lastIds.push(group.id)
           }
         }
-        console.log(this.paginantor_config)
+        //console.log(this.paginantor_config)
         resolve("")
       })
     })
@@ -427,7 +423,7 @@ export class ApiService {
         status: v.status.split("_")[1].toLowerCase().charAt(0).toUpperCase() 
           + v.status.split("_")[1].toLowerCase().slice(1),  
         objects: v.objects.map(o => Object.assign(o, { contentLen: o["contentLen"].replace(/\B(?=(\d{3})+(?!\d))/g, ".") })) }))
-      console.log(new_data)
+      //console.log(new_data)
       this.obj_groups = new_data
       resolve("")
     })
@@ -476,7 +472,7 @@ export class ApiService {
   downloadSingleObject(object) {
     return new Promise(resolve => {
       this.http.get(this.gateway_url + "/objectload/download/" + object.id, this.configureHeadersAccessKey()).pipe().subscribe(res_added => {
-        console.log(res_added)
+        console.log("Download Link and Object Details:", res_added)
         this.http.get(res_added["downloadLink"], { responseType: "blob" }).subscribe(res_dl => {
           FileSaver.saveAs(res_dl, object.filename + "." + object.filetype)
         })
@@ -507,11 +503,11 @@ export class ApiService {
 
   //Executes http get requests to download all objects in the object group
   downloadObjectGroupNew(group) {
-    console.log(group)
+    console.log("Objects Group Details:", group)
     for (let object of group.objects) {
-      console.log(object)
+      //console.log(object)
       this.http.get(this.gateway_url + "/objectload/download/" + object.id, this.configureHeadersAccessKey()).pipe().subscribe(res_added => {
-        console.log(res_added)
+        //console.log(res_added)
         this.http.get(res_added["downloadLink"], { responseType: "blob" }).subscribe(res_dl => {
           FileSaver.saveAs(res_dl, object.filename + "." + object.filetype)
         })

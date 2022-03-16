@@ -48,7 +48,6 @@ export class CreateObjgroupComponent implements OnInit {
   constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {
   
     
-    console.log(this.maxDate)
     this.labelColumns=["key", "value", "delete"]
     this.displayedColumns=["filename","filetype","contentLen", "uploaded" , "delete"]
     this.object_table = new MatTableDataSource(this.new_objgroup.objects)

@@ -34,7 +34,6 @@ export class VersionOverviewComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    console.log(this.apiService.datasetVersions)
     this.table_data = new MatTableDataSource(this.apiService.datasetVersions)
     this.displayedColumns=["name", "description","version", "created","actions"]
     /*if (this.apiService.paginantor_config_versions.activepage + 1 == this.apiService.paginantor_config_versions.pagecount) {

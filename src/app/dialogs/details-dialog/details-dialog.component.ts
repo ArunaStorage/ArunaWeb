@@ -26,7 +26,7 @@ export class DetailsDialogComponent implements OnInit {
     private dialog: MatDialog
 
   ) {
-    console.log(data)
+    //console.log(data)
     this.labelColumns = ["key", "value"]
     this.label_table = new MatTableDataSource(this.data.labels)
     this.objectColumns = ["filename", "filetype", "created", "filesize", "actions"]

@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result){
-        console.log("Dialog closed: ", result)
+        console.log("Dialog closed")
         this.apiService.deleteProject(id).then(()=> this.refreshProjects())
       } else {
         console.log("Dialog dismissed")
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
 
   createProject(){
     //Function for creating a new project
-    console.log("Generating Project...")
+    console.log("Open Dialog for Create Project")
     const dialogRef = this.dialog.open(CreateProjectComponent, {
       data: {type: "Project"}, 
       hasBackdrop:true,
@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
        })
     dialogRef.afterClosed().subscribe(result => {
       if (result){
-        console.log("Dialog closed: ", result)
+        console.log("Dialog closed")
         this.apiService.createProject(result).then(()=> {
           this.refreshProjects()
         })
@@ -176,7 +176,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewDetails(element){
-    console.log("See Details...")    
+    console.log("Open Details Dialog")    
     this.apiService.viewSingleProject(element.id).then((res: any) => {
       Object.assign(res, {type: "Project"})
        const dialogRef = this.dialog.open(DetailsDialogComponent, {

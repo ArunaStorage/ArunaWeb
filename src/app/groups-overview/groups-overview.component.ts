@@ -63,8 +63,6 @@ export class GroupsOverviewComponent implements OnInit {
     public authService: AuthService,
     private clipboard: Clipboard
   ) {
-    //console.log(this.upload_progress)
-    console.log(this.apiService.obj_groups)
     this.displayedColumns = ["name", "description", "objectcount", "created","status", "actions"]
     this.inner_displayedColumns = ["filename", "filetype", "created", "filesize", "actions"]
     this.obj_groups_table = new MatTableDataSource(this.apiService.obj_groups)
@@ -348,7 +346,7 @@ export class GroupsOverviewComponent implements OnInit {
 
   downloadObject(object) {
     // download single object
-    console.log("Downloading Object", object)
+    console.log("Downloading Object")
     this.apiService.downloadSingleObject(object)
   }
 
@@ -375,7 +373,7 @@ export class GroupsOverviewComponent implements OnInit {
   }*/
   downloadObjectGroup(element) {
     // download object group
-    console.log("Downloading Object group...")
+    console.log("Downloading Object group")
     this.apiService.downloadObjectGroupNew(element)
     /*
     this.apiService.downloadObjectGroup(element.id).then(res => {
@@ -427,9 +425,9 @@ export class GroupsOverviewComponent implements OnInit {
   }
 
   viewDetails(element){
-    console.log("See Details...")    
+    console.log("Open Details Dialog")    
     this.apiService.getObjectGroup(element.id).then((res: any) => {
-      console.log(res)
+      console.log("Objects Group Information:", res)
       Object.assign(res, {type: "Object Group"})
        const dialogRef = this.dialog.open(DetailsDialogComponent, {
         data: res,

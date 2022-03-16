@@ -38,7 +38,7 @@ export class ProjectOverviewComponent implements OnInit {
     public apiService: ApiService,
     public authService: AuthService
   ) {
-    console.log(this.apiService.project)
+    
     this.displayedColumns=[ "name", "description", "created","status", "actions"]
     this.dataset_table = new MatTableDataSource(this.apiService.project.datasets)
    }
@@ -82,14 +82,14 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   newDataset(){
-    console.log("Generating dataset...")
+    console.log("Open Dialog for Create Dataset");
     const dialogRef = this.dialog.open(CreateProjectComponent, { 
       data: {type: "Dataset"},
       hasBackdrop:true
        })
     dialogRef.afterClosed().subscribe(result => {
       if (result){
-        console.log("Dialog closed: ", result)
+        console.log("Dialog closed")
         this.apiService.createDataset(result).then(()=> {
           this.refreshDatasets()})
       } else {
@@ -99,7 +99,7 @@ export class ProjectOverviewComponent implements OnInit {
   }
   
   viewDetails(element){
-    console.log("See Details...")
+    console.log("Open Details Dialog")
     
     this.apiService.getDatasetDetails(element.id).then((res:any) => {
       Object.assign(res, {type: "Dataset"})
@@ -117,7 +117,7 @@ export class ProjectOverviewComponent implements OnInit {
       this.router.navigate(['/version_overview']);
 
     })
-    console.log(element)
+    console.log("Dataset Information:", element)
     /*this.apiService.getDatasetVersionsPagination(element).then(()=> {
       this.apiService.viewDatasetVersionsPagination(element).then(()=> {
       
@@ -139,7 +139,7 @@ export class ProjectOverviewComponent implements OnInit {
       disableClose: true
     })
     
-    console.log("See ObjectGroups..." + element)
+    console.log("See Object Groups...")
     this.apiService.getObjectGroupPagination(element).then(()=> {
       this.apiService.viewObjectGroups(element).then(()=> {
       dialogRef.close()
