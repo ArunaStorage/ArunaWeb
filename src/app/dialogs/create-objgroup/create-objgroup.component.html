@@ -17,10 +17,12 @@
     <mat-form-field appearance="fill" class="example-form">
         <mat-label>Name</mat-label>
         <input type="text" (keyup)="isValid()" matInput [(ngModel)]="new_objgroup.name" placeholder="Example1">
+        <mat-hint align="start">Enter a Name for the new Object Group here.</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="fill" class="example-form">
         <mat-label>Description</mat-label>
         <input type="text" (keyup)="isValid()" matInput [(ngModel)]="new_objgroup.description" placeholder="Example1">
+        <mat-hint align="start">Enter a Description for the new Object Group here.</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="fill" class="example-form">
         <mat-label>UUID</mat-label>
@@ -33,6 +35,7 @@
         <mat-label>Generated on</mat-label>
         <input matInput (dateInput)="addtoObject()" [max]="maxDate" [(ngModel)]="generated_date"
             [matDatepicker]="generated">
+            <mat-hint align="start">Select a Date for the new Object Group here.</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="generated"></mat-datepicker-toggle>
         <mat-datepicker #generated></mat-datepicker>
     </mat-form-field>
@@ -117,6 +120,7 @@
                     <mat-form-field appearance="fill" class="example-form">
                         <mat-label>Key</mat-label>
                         <input type="text" matInput [(ngModel)]="label.key" placeholder="e.g. Organism">
+                        <mat-hint align="start">Add Key-Value pairs for the new Object Group here for filtering.</mat-hint>
                     </mat-form-field>
                 </div>
                 <div fxFlex="45%" fxFlex.xs="100%" fxFlex.sm="33%">

@@ -8,29 +8,34 @@
     <mat-card>
         <mat-card-content>
             <mat-accordion multi>
+
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>Specs</mat-panel-title>
                         <mat-panel-description>Enter and Edit Name, Description</mat-panel-description>
-
                     </mat-expansion-panel-header>
+
                     <mat-form-field appearance="fill" class="example-form">
                         <mat-label>Name</mat-label>
                         <input type="text" matInput (keyup)="validProject()" [(ngModel)]="new_project.name"
                             placeholder="Example1">
+                        <mat-hint align="start">Enter a Name for the new {{data.type}} here.</mat-hint>
                     </mat-form-field>
+
                     <mat-form-field appearance="fill" class="example-form">
                         <mat-label>Description</mat-label>
                         <input type="text" matInput (keyup)="validProject()" [(ngModel)]="new_project.description"
                             placeholder="This is an example {{data.type}}">
+                        <mat-hint align="start">Enter a Description for the new {{data.type}} here.</mat-hint>
                     </mat-form-field>
                 </mat-expansion-panel>
+
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>Metadata</mat-panel-title>
                         <mat-panel-description>Add and Delete Metadata</mat-panel-description>
-
                     </mat-expansion-panel-header>
+
                     <div fxLayout="row wrap" fxLayoutGap="16px grid">
                         <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%">
                             <button mat-raised-button color="accent" (click)="addMetadata()">
@@ -61,7 +66,7 @@
                         </div>
                     </div>
                 </mat-expansion-panel>
-                
+
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -77,6 +82,7 @@
                             <mat-form-field appearance="fill" class="example-form">
                                 <mat-label>Key</mat-label>
                                 <input type="text" matInput [(ngModel)]="label.key" placeholder="e.g. Organism">
+                                <mat-hint align="start">Add Key-Value pairs for the new {{data.type}} here for filtering.</mat-hint>
                             </mat-form-field>
                         </div>
                         <div fxFlex="45%" fxFlex.xs="100%" fxFlex.sm="33%">
@@ -119,12 +125,12 @@
 </div>
 
 <div *ngIf="disabled">
-    Please add for generation: {{requirements}} 
+    Please add for generation: {{requirements}}
 </div>
 
-<div mat-dialog-actions >
+<div mat-dialog-actions>
 
-    <button mat-raised-button color="primary" [disabled]="disabled" [mat-dialog-close]="new_project" >Generate</button>
+    <button mat-raised-button color="primary" [disabled]="disabled" [mat-dialog-close]="new_project">Generate</button>
     <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
 
 </div>

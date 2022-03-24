@@ -24,11 +24,13 @@
                                 <mat-label>Name</mat-label>
                                 <input type="text" (keyup)="validVersion()" matInput [(ngModel)]="new_version.name"
                                     placeholder="Example1">
+                                    <mat-hint align="start">Enter a Name for the new Version here.</mat-hint>
                             </mat-form-field>
                             <mat-form-field appearance="fill" class="example-form">
                                 <mat-label>Description</mat-label>
                                 <input type="text" (keyup)="validVersion()" matInput
                                     [(ngModel)]="new_version.description" placeholder="Example1">
+                                    <mat-hint align="start">Enter a Description for the new Version here.</mat-hint>
                             </mat-form-field>
                         </mat-expansion-panel>
 
@@ -147,6 +149,7 @@
                                     <mat-form-field appearance="fill" class="example-form">
                                         <mat-label>Key</mat-label>
                                         <input type="text" matInput [(ngModel)]="label.key" placeholder="e.g. Organism">
+                                        <mat-hint align="start">Add Key-Value pairs for the new Version here for filtering.</mat-hint>
                                     </mat-form-field>
                                 </div>
                                 <div fxFlex="45%" fxFlex.xs="100%" fxFlex.sm="33%">
