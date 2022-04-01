@@ -23,19 +23,19 @@
                         <mat-label>Filename</mat-label>
                         <input type="text" matInput (keyup)=isNotValid() [(ngModel)]="new_obj.filename"
                             placeholder="Example1">
-                            <mat-hint align="start">Enter a Name for the new Object here or upload a File to autofill.</mat-hint>
+                        <mat-hint align="start">Enter a Name for the new Object here or upload a File to autofill.</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="example-form">
                         <mat-label>Filetype</mat-label>
                         <input type="text" matInput (keyup)=isNotValid() [(ngModel)]="new_obj.filetype"
                             placeholder="Example1">
-                            <mat-hint align="start">Enter a Filetype for the new Object here or upload a File to autofill.</mat-hint>
+                        <mat-hint align="start">Enter a Filetype for the new Object here or upload a File to autofill.</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="example-form">
                         <mat-label>File Size</mat-label>
                         <input type="number" [disabled]="new_obj.uploaded" matInput (keyup)=isNotValid()
                             [(ngModel)]="new_obj.contentLen">
-                            <mat-hint align="start">Enter a File Size (in Bytes) for the new Object here or upload a File to autofill.</mat-hint>
+                        <mat-hint align="start">Enter a File Size (in Bytes) for the new Object here or upload a File to autofill.</mat-hint>
                     </mat-form-field>
 
                     <div fxLayout="row wrap" fxLayoutGap="16px grid">
