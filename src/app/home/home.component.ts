@@ -19,12 +19,16 @@ import { ConfigDetailsDialogComponent } from '../dialogs/config-details-dialog/c
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'] 
 })
+
+
 export class HomeComponent implements OnInit {
 
   @ViewChild(MatSort) sort:MatSort
 
   project_table: any
   displayedColumns: string[]
+
+  darkmode: boolean = false
 
   constructor(
     public dialog: MatDialog,
