@@ -4,6 +4,7 @@
 
 @include mat.core();
 
+@import "~@angular/material/theming";
 
 $roboto-font-path: "~roboto-fontface/fonts" !default;
 @import "~roboto-fontface/css/roboto/sass/roboto-fontface";
@@ -25,8 +26,9 @@ $angular-default-theme: mat.define-light-theme(
   )
 );
 
+@include mat.all-component-themes($angular-default-theme);
 
-/*$angular-dark-theme: mat.define-dark-theme(
+$angular-dark-theme: mat.define-dark-theme(
   (
     color: (
       primary: $my-primary,
@@ -34,12 +36,12 @@ $angular-default-theme: mat.define-light-theme(
       warn: $my-warn,
     ),
   )
-);*/
-@include mat.all-component-themes($angular-default-theme);
+);
 
-/*.darkMode {
+
+.darkMode {
   @include mat.all-component-colors($angular-dark-theme);
-}*/
+}
 
 /*$indigo-pink-theme: mat.define-light-theme((
  color: (
@@ -67,8 +69,9 @@ $dark-theme: mat.define-dark-theme((
 @include mat.all-component-themes($indigo-pink-theme);*/
 
 
-html, body { height: 100%; width: 100%; margin: 0px; padding: 0px; overflow-x: hidden;}
+html, body { height: 100%; width: 100%; margin: 0px; padding: 0px; overflow-x: hidden; background-color: black}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .warning-snackbar {
     background: #da5a5a;
     color: #000000;
