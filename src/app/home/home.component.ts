@@ -12,7 +12,7 @@ import { ProfileDialogComponent } from '../dialogs/profile-dialog/profile-dialog
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DetailsDialogComponent } from '../dialogs/details-dialog/details-dialog.component';
 import { ConfigDetailsDialogComponent } from '../dialogs/config-details-dialog/config-details-dialog.component';
-
+import { NotificationsComponent } from '../dialogs/notifications/notifications.component';
 
 @Component({
   selector: 'app-home',
@@ -148,6 +148,15 @@ export class HomeComponent implements OnInit {
     this.apiService.getProjects().then(()=> {
       this.project_table = new MatTableDataSource(this.apiService.projects)
       this.project_table.sort = this.sort
+    })
+  }
+
+  openNotifications(){
+    //Function to open the Notifications dialog
+    const dialogRef = this.dialog.open(NotificationsComponent, {
+      position: {right: "10px", top: "10px"},
+      hasBackdrop: true,
+      width: "30%"
     })
   }
 

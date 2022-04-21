@@ -2,6 +2,11 @@
     <span>BioData DB - Project Overview</span>
     <span class="example-spacer"></span>
 
+    <button mat-icon-button #tooltip="matTooltip" matTooltip="Notifications" matTooltipPosition="below"
+        color="secondary" (click)="openNotifications()">
+        <mat-icon>notifications</mat-icon>
+    </button>
+
     <button mat-icon-button #tooltip="matTooltip" matTooltip="Endpoint URLs" matTooltipPosition="below"
         color="secondary" (click)="openEndpoints()">
         <mat-icon>build</mat-icon>

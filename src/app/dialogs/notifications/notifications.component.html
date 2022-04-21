@@ -1,0 +1,53 @@
+<h1 mat-dialog-title color="primary">
+    <button mat-mini-fab mat-dialog-close #tooltip="matTooltip" matTooltip="Close" matTooltipPosition="below"
+        color="primary">
+        <mat-icon>close</mat-icon>
+    </button>
+    Notifications
+</h1>
+
+<div mat-dialog-content>
+    <mat-tab-group>
+
+        <mat-tab label="Notifications">
+                
+        </mat-tab>
+
+        <mat-tab label="Settings">
+            <mat-list>
+                <div fxLayout="row wrap" fxLayoutGap="16px grid">
+
+                    <mat-list-item>
+                        Was willst du abonnieren?
+                    </mat-list-item>
+                    <mat-list-item>
+                        Auswahl aller Ebenen + Inhalt
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        Include subresources
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-slide-toggle class="example-margin" color=primary [checked]="checked"></mat-slide-toggle>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        See all notifications from the chosen Data
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-slide-toggle class="example-margin" color=primary [checked]="checked"></mat-slide-toggle>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        See all notifications for the chosen Data from:
+                    </mat-list-item>
+                    <mat-list-item>
+                        Kalender
+                    </mat-list-item>
+
+                </div>
+            </mat-list>    
+        </mat-tab>
+
+    </mat-tab-group>
+</div>

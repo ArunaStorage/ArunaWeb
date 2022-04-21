@@ -60,6 +60,8 @@ import { MetadataAddComponent } from './dialogs/metadata-add/metadata-add.compon
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ConfigDetailsDialogComponent } from './dialogs/config-details-dialog/config-details-dialog.component';
 import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.component';
+import { NotificationsComponent } from './dialogs/notifications/notifications.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 function initialize(http: HttpClient, config: ConfigService) {
 	return (): Promise<boolean> => {
@@ -112,6 +114,7 @@ export function storageFactory() : OAuthStorage {
     MetadataAddComponent,
     ConfigDetailsDialogComponent,
     ErrorDialogComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -145,6 +148,7 @@ export function storageFactory() : OAuthStorage {
     HttpClientModule,
     MatCheckboxModule,
     NgxJsonViewerModule,
+    MatSlideToggleModule,
     OAuthModule.forRoot()
   ],
   providers: [[{
