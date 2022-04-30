@@ -18,31 +18,49 @@
                 <div fxLayout="row wrap" fxLayoutGap="16px grid">
 
                     <mat-list-item>
-                        Was willst du abonnieren?
+                        Select project to subscribe:
                     </mat-list-item>
                     <mat-list-item>
-                        Auswahl aller Ebenen + Inhalt
+
+                        <mat-form-field appearance="fill" class="example-form">
+                            <mat-label>Project</mat-label>
+                            <mat-select (selectionChange)="isValid()" [(ngModel)]="selected_project">
+
+                                <mat-option *ngFor="let project of apiService.projects" [value]="project">
+                                    {{project.name}}
+                                </mat-option>
+                                
+                            </mat-select>
+                        </mat-form-field>
                     </mat-list-item>
 
                     <mat-list-item>
                         Include subresources
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-slide-toggle class="example-margin" color=primary [checked]="checked"></mat-slide-toggle>
+                        <mat-slide-toggle class="example-margin" color=primary [(ngModel)]="subresources_checked"></mat-slide-toggle>
                     </mat-list-item>
 
                     <mat-list-item>
-                        See all notifications from the chosen Data
+                        Get notifications for the chosen Project only from specified date:
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-slide-toggle class="example-margin" color=primary [checked]="checked"></mat-slide-toggle>
+                        <mat-slide-toggle class="example-margin" color=primary (change)="isValid()" [(ngModel)]="sub_from_date"></mat-slide-toggle>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf = "sub_from_date">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput (dateChange)="isValid()"[(ngModel)]="picked_date" [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
                     </mat-list-item>
 
                     <mat-list-item>
-                        See all notifications for the chosen Data from:
-                    </mat-list-item>
-                    <mat-list-item>
-                        Kalender
+                        <button mat-raised-button color="primary" [disabled]="notValid" (click)="send_subscription()">
+                            Subscribe
+                        </button>
                     </mat-list-item>
 
                 </div>
