@@ -25,6 +25,7 @@ export class ApiService {
   public obj_groups: []
   public paginantor_config = { stats: { groupscount: 0, objectscount: 0 }, lastIds: [], pagesize: 250, pagecount: 0, activepage: 0 }
   public paginantor_config_versions = { stats: { groupscount: 0, objectscount: 0 }, lastIds: [], pagesize: 250, pagecount: 0, activepage: 0 }
+  public streamGroupIDs = []
 
   //global vars for multipart upload
   chunksize = 15000000
@@ -44,6 +45,9 @@ export class ApiService {
   ) {
     this.gateway_url = this.configService.gateway_url
     this.projects = []
+    /*if(localStorage.getItem("streamGroupIDs")){
+      this.streamGroupIDs = JSON.parse(localStorage.getItem("streamGroupIDs"))
+    }*/
   }
 
   //Creates and retruns a http header with the access token included
@@ -803,5 +807,36 @@ export class ApiService {
     //send next chunk
     this.sendNext(object, index)
   }
+
+  //Executes a http post request to subscribe notifications for a project
+  createSubscription(notification_object) {
+    return new Promise(resolve => {
+      var post_object = { 
+        resource: "EVENT_RESOURCES_UNSPECIFIED", 
+        resourceId: notification_object.selected_project.id, 
+        includeSubresource: notification_object.subresources_checked, 
+        ...(!notification_object.sub_from_date) && {streamAll:{}}, 
+        ...(notification_object.sub_from_date) && {streamFromDate:{timestamp: moment(notification_object.picked_date).toISOString()}} 
+      }
+
+      console.log("Post-Object:", post_object)
+      console.log("Notification-Object:", notification_object)
+
+      this.http.post(this.gateway_url + "/eventstream/createstreaminggroup", post_object, this.configureHeadersAccessKey()).pipe().subscribe((res: any) => {
+        console.log(res)
+        this.streamGroupIDs.push({streamID: res.streamGroupId, project: notification_object.selected_project})
+        //localStorage.setItem("streamGroupIDs", JSON.stringify(this.streamGroupIDs))
+        console.log("StreamGroupID-Liste:", this.streamGroupIDs)
+        resolve("")
+      }, err => {
+        console.log(err)
+        this.openErrorDialog(err)
+      }
+      )
+      resolve("")
+    })
+
+  }
+
 
 }

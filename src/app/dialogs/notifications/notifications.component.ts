@@ -26,6 +26,7 @@ export class NotificationsComponent implements OnInit {
   send_subscription(){
     var new_subscription= {selected_project: this.selected_project, subresources_checked: this.subresources_checked, sub_from_date: this.sub_from_date, picked_date: this.picked_date}
     console.log("Subscription Object:", new_subscription)
+    this.apiService.createSubscription(new_subscription)
   }
 
   isValid(){
