@@ -136,7 +136,7 @@ export class ProjectOverviewComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadingComponent, {
       hasBackdrop: true,
       disableClose: true
-    })  
+    })
     console.log("See ObjectGroups..." , element)
     this.apiService.getObjectGroupPagination(element).then(()=> {
       this.apiService.viewObjectGroups(element).then(()=> {

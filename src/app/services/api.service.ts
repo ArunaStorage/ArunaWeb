@@ -550,12 +550,12 @@ export class ApiService {
         console.log(res)
 
         this.paginantor_config.stats.groupscount = res["objectGroups"].length
-        this.paginantor_config.stats.objectscount = 0
+        //this.paginantor_config.stats.objectscount = 0
         this.paginantor_config.pagecount = Math.ceil(this.paginantor_config.stats.groupscount / this.paginantor_config.pagesize)
         this.paginantor_config.lastIds = []
         this.paginantor_config.activepage = 0
         for (let [i, group] of res["objectGroups"].entries()) {
-          this.paginantor_config.stats.objectscount += group["objects"].length
+         // this.paginantor_config.stats.objectscount += group["objects"].length
           if (i % this.paginantor_config.pagesize == this.paginantor_config.pagesize - 1) {
             console.log("last element", i, group)
             this.paginantor_config.lastIds.push(group.id)
@@ -589,11 +589,11 @@ export class ApiService {
     return new Promise(resolve => {
       var new_data = data.map(v => Object.assign(v, {
         isExpanded: false,
-        objectcount: v["objects"].length,
-        created: v["objects"][0].created,
-        status: v.status.split("_")[1].toLowerCase().charAt(0).toUpperCase()
-          + v.status.split("_")[1].toLowerCase().slice(1),
-        objects: v.objects.map(o => Object.assign(o, { contentLen: o["contentLen"].replace(/\B(?=(\d{3})+(?!\d))/g, ".") }))
+        //objectcount: v["objects"].length,
+        //created: v["objects"][0].created,
+        //status: v.status.split("_")[1].toLowerCase().charAt(0).toUpperCase()
+        //  + v.status.split("_")[1].toLowerCase().slice(1),
+        //objects: v.objects.map(o => Object.assign(o, { contentLen: o["contentLen"].replace(/\B(?=(\d{3})+(?!\d))/g, ".") }))
       }))
       console.log(new_data)
       this.obj_groups = new_data
