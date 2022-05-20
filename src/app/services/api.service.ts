@@ -517,17 +517,17 @@ export class ApiService {
       this.http.post(this.gateway_url + "/objectgroup/get", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
         var formated_res = res["objectGroup"]
         Object.assign(formated_res, {
-          created: res["objectGroup"]["objects"][0].created,
-          objectcount: res["objectGroup"]["objects"].length,
+          //created: res["objectGroup"]["objects"][0].created,
+          //objectcount: res["objectGroup"]["objects"].length,
 
-          formated_avg: this.formatNumber(formated_res.stats.avgObjectSize),
-          formated_acc: this.formatNumber(formated_res.stats.accSize),
+          //formated_avg: this.formatNumber(formated_res.stats.avgObjectSize),
+          //formated_acc: this.formatNumber(formated_res.stats.accSize),
 
-          filetypes: Array.from(new Set(res["objectGroup"].objects.map(o => o.filetype))),
+          //filetypes: Array.from(new Set(res["objectGroup"].objects.map(o => o.filetype))),
           //sumContentLen: String(res["objectGroup"].objects.map(o => Number(o.contentLen)).reduce((a,b) => a + b,0)).replace(/\B(?=(\d{3})+(?!\d))/g, "."),
-          objects: res["objectGroup"].objects.map(o => Object.assign(o, {
-            contentLen: o["contentLen"].replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-          }))
+          //objects: res["objectGroup"].objects.map(o => Object.assign(o, {
+          //  contentLen: o["contentLen"].replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+          //}))
         })
         resolve(formated_res)
       }, err => {

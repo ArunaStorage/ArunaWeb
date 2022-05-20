@@ -6,7 +6,7 @@
     Details - {{data.type}}: {{data.name}}
 </h1>
 
-<div  mat-dialog-content>
+<div mat-dialog-content>
 
     <mat-tab-group>
         <mat-tab label="Details">
@@ -93,6 +93,7 @@
                         </div>
                     </mat-list-item>
 
+                    <!--
                     <mat-list-item *ngIf="data.type =='Object Group'">
                         <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
                             <mat-icon>attach_file</mat-icon>
@@ -104,7 +105,7 @@
                             {{data.filetypes}}
                         </div>
                     </mat-list-item>
-
+                    -->
 
 
                     <mat-list-item *ngIf="data.type =='Project'">
@@ -131,7 +132,7 @@
                         </div>
                     </mat-list-item>
 
-                    <mat-list-item>
+                    <mat-list-item *ngIf="data.type !='Object Group'">
                         <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
                             <mat-icon>functions</mat-icon>
                         </div>
@@ -143,7 +144,7 @@
                         </div>
                     </mat-list-item>
 
-                    <mat-list-item>
+                    <mat-list-item *ngIf="data.type !='Object Group'">
                         <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
                             <mat-icon>bar_chart</mat-icon>
                         </div>
@@ -155,7 +156,7 @@
                         </div>
                     </mat-list-item>
 
-                    <mat-list-item>
+                    <mat-list-item *ngIf="data.type !='Object Group'">
                         <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
                             <mat-icon>bar_chart</mat-icon>
                         </div>
@@ -167,13 +168,123 @@
                         </div>
                     </mat-list-item>
 
-                    
+                    <mat-list-item *ngIf="data.type =='Object Group'">
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>functions</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            Number of Revisions:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.revisionCounter}}
+                        </div>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="data.type =='Object Group'">
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>functions</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            Current Revision:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.name}}
+                        </div>
+                    </mat-list-item>
 
                 </div>
             </mat-list>
             <br>
         </mat-tab>
 
+        <mat-tab *ngIf="data.type =='Object Group'" label="Current Revision">
+            <mat-list>
+                <div fxLayout="row wrap" fxLayoutGap="16px grid" class="div-container">
+
+                    <mat-list-item>
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>local_offer</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            Name:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.name}}
+                        </div>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>create</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            Created:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.created | date: "dd. MMM yyyy, HH:mm.ss"}}
+                        </div>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>fingerprint</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            ID:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.id}}
+                        </div>
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <button [cdkCopyToClipboard]="data.currentRevision.id" mat-icon-button #tooltip="matTooltip"
+                                matTooltip="Copy ID" matTooltipPosition="above" color="primary"
+                                (click)="openSnackBar()">
+                                <mat-icon>content_copy</mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="data.type =='Object Group'">
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>functions</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            Number of Objects:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.stats.objectCount}}
+                        </div>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="data.type =='Object Group'">
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>functions</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                           Total Size:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.stats.accSize}}
+                        </div>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="data.type =='Object Group'">
+                        <div fxFlex="5%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-icon>functions</mat-icon>
+                        </div>
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                           Average Size:
+                        </div>
+                        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            {{data.currentRevision.stats.avgObjectSize}}
+                        </div>
+                    </mat-list-item>
+
+                </div>
+            </mat-list>
+        </mat-tab>
+
+        <!--
         <mat-tab *ngIf="data.type =='Object Group'" label="Objects">
 
             <table mat-table [dataSource]="object_table" class="mat-elevation-z4">
@@ -217,6 +328,7 @@
                 <tr mat-row *matRowDef="let row; columns: objectColumns;"></tr>
             </table>
         </mat-tab>
+        -->
 
         <mat-tab *ngIf="data.type =='Version'" label="Object Groups">
 
