@@ -288,6 +288,10 @@
                 matTooltipClass="warning-snackbar" color="warn" (click)="deleteObjGroup(element.name, element.id)">
                 <mat-icon>delete_forever</mat-icon>
             </button>
+            <button mat-icon-button #tooltip="matTooltip" matTooltip="Go to Revisions" matTooltipPosition="above"
+                color="primary" (click)="viewRevision(element)">
+                <mat-icon>history</mat-icon>
+            </button>
         </td>
     </ng-container>
 

@@ -439,4 +439,14 @@ export class GroupsOverviewComponent implements OnInit {
     })
   }
 
+  viewRevision(element){
+    console.log("See versions...")
+    this.apiService.getRevisions(element.id).then(res => {
+      this.router.navigate(['/revision_overview']);
+
+    })
+    console.log("element:",element)
+    console.log("element.id:",element.id)
+    }
+
 }

@@ -60,6 +60,8 @@ import { MetadataAddComponent } from './dialogs/metadata-add/metadata-add.compon
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ConfigDetailsDialogComponent } from './dialogs/config-details-dialog/config-details-dialog.component';
 import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.component';
+import { RevisionOverviewComponent } from './revision-overview/revision-overview.component';
+import { CreateRevisionComponent } from './dialogs/create-revision/create-revision.component';
 
 function initialize(http: HttpClient, config: ConfigService) {
 	return (): Promise<boolean> => {
@@ -112,6 +114,8 @@ export function storageFactory() : OAuthStorage {
     MetadataAddComponent,
     ConfigDetailsDialogComponent,
     ErrorDialogComponent,
+    RevisionOverviewComponent,
+    CreateRevisionComponent,
   ],
   imports: [
     BrowserModule,

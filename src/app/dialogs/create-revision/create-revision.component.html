@@ -1,0 +1,35 @@
+<h1 mat-dialog-title color="primary">
+    <button mat-mini-fab mat-dialog-close #tooltip="matTooltip" matTooltip="Close" matTooltipPosition="below"
+        color="primary">
+        <mat-icon>close</mat-icon>
+    </button>
+    Create Revision
+</h1>
+
+<div mat-dialog-content>
+    <mat-card>
+        <mat-card-content>
+            <mat-accordion multi>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Specs</mat-panel-title>
+                        <mat-panel-description>Enter and Edit Name, Description</mat-panel-description>
+
+                    </mat-expansion-panel-header>
+                    <mat-form-field appearance="fill" class="example-form">
+                        <mat-label>Name</mat-label>
+                        <!--
+                        <input type="text" matInput (keyup)="validProject()" [(ngModel)]="new_project.name" placeholder="Example1">
+                        -->
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="example-form">
+                        <mat-label>Description</mat-label>
+                        <!--
+                        <input type="text" matInput (keyup)="validProject()" [(ngModel)]="new_project.description" placeholder="This is an example {{data.type}}">
+                        -->
+                    </mat-form-field>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+</div>

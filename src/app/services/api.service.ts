@@ -23,6 +23,8 @@ export class ApiService {
   public dataset: any
   public datasetVersions: any
   public obj_groups: []
+  public objectGroup: any
+  public objectGroupRevisions: any
   public paginantor_config = { stats: { groupscount: 0, objectscount: 0 }, lastIds: [], pagesize: 250, pagecount: 0, activepage: 0 }
   public paginantor_config_versions = { stats: { groupscount: 0, objectscount: 0 }, lastIds: [], pagesize: 250, pagecount: 0, activepage: 0 }
 
@@ -516,12 +518,15 @@ export class ApiService {
       console.log(post_object)
       this.http.post(this.gateway_url + "/objectgroup/get", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
         var formated_res = res["objectGroup"]
+
+        console.log("formated_res:" , formated_res)
+  
         Object.assign(formated_res, {
           //created: res["objectGroup"]["objects"][0].created,
           //objectcount: res["objectGroup"]["objects"].length,
 
-          //formated_avg: this.formatNumber(formated_res.stats.avgObjectSize),
-          //formated_acc: this.formatNumber(formated_res.stats.accSize),
+          formated_avg: this.formatNumber(formated_res.currentRevision.stats.avgObjectSize),
+          formated_acc: this.formatNumber(formated_res.currentRevision.stats.accSize),
 
           //filetypes: Array.from(new Set(res["objectGroup"].objects.map(o => o.filetype))),
           //sumContentLen: String(res["objectGroup"].objects.map(o => Number(o.contentLen)).reduce((a,b) => a + b,0)).replace(/\B(?=(\d{3})+(?!\d))/g, "."),
@@ -538,6 +543,29 @@ export class ApiService {
     })
   }
 
+  //Executes a http post request to get all revisions of the objectGroup
+  getRevisions(id) {
+    return new Promise(resolve => {
+      var post_object = { id: id }
+      console.log(post_object)
+      this.http.post(this.gateway_url + "/objectgroup/get", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
+       this.objectGroup = res["objectGroup"]
+       this.objectGroupRevisions = res ["objectGroupRevisions"]
+
+        console.log("res:", res)
+        console.log("this.objectGroup:", this.objectGroup)
+        console.log("this.objectGroupRevisions:", this.objectGroupRevisions)
+
+        resolve("")
+      }, err => {
+        console.log(err)
+        this.openErrorDialog(err)
+
+        
+      }
+      )
+    })
+  }
 
 
 
