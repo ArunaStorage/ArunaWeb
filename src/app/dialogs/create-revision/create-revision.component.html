@@ -30,7 +30,10 @@
             <button mat-raised-button color="primary" (click)="createObject()">
                 Add Object
             </button>
-            <table mat-table [dataSource]="objects_table" class="table">
+
+            <br>
+            <mat-label>Object Overview</mat-label>
+            <table mat-table [dataSource]="objects_table_overview" class="mat-elevation-z8">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Filename </th>
                     <td mat-cell *matCellDef="let element"> </td>
@@ -56,8 +59,92 @@
                         </button>
                     </td>
                 </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns_overview"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns_overview;"></tr>
+            </table>
+
+            <br>
+            <mat-label>Added Objects</mat-label>
+            <table mat-table [dataSource]="objects_table_add" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Filename </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Filetype </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="created">
+                    <th mat-header-cell *matHeaderCellDef> Created </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button #tooltip="matTooltip" matTooltip="Delete Object"
+                            matTooltipPosition="above" color="warn" matTooltipClass="warning-snackbar">
+                            <mat-icon>delete_forever</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns_add"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns_add;"></tr>
+            </table>
+
+            <br>
+            <mat-label>Updated Objects</mat-label>
+            <table mat-table [dataSource]="objects_table_update" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Filename </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Filetype </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="created">
+                    <th mat-header-cell *matHeaderCellDef> Created </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button #tooltip="matTooltip" matTooltip="Delete Object"
+                            matTooltipPosition="above" color="warn" matTooltipClass="warning-snackbar">
+                            <mat-icon>delete_forever</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns_update"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns_update;"></tr>
+            </table>
+
+            <br>
+            <mat-label>Deleted Objects</mat-label>
+            <table mat-table [dataSource]="objects_table_delete" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Filename </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Filetype </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="created">
+                    <th mat-header-cell *matHeaderCellDef> Created </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button #tooltip="matTooltip" matTooltip="Undelete"
+                            matTooltipPosition="above" color="warn" matTooltipClass="warning-snackbar">
+                            <mat-icon>history</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns_delete"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns_delete;"></tr>
             </table>
         </mat-tab>
 

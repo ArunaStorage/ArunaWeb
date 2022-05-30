@@ -22,8 +22,16 @@ export class CreateRevisionComponent implements OnInit {
     metadata: {add:[], update:[], delete:[]}
   }
 
-  objects_table: any
-  displayedColumns: string[]
+  objects_table_overview: any
+  objects_table_add: any
+  objects_table_update: any
+  objects_table_delete: any
+
+  displayedColumns_overview: string[]
+  displayedColumns_add: string[]
+  displayedColumns_update: string[]
+  displayedColumns_delete: string[]
+
   valid = false;
 
   constructor(
@@ -32,8 +40,17 @@ export class CreateRevisionComponent implements OnInit {
     private dialog: MatDialog
 
   ) { 
-    this.objects_table = new MatTableDataSource(this.apiService.objectGroup.currentRevision.objects)
-    this.displayedColumns=[ "name", "description", "created", "actions"]
+    this.objects_table_overview = new MatTableDataSource(this.apiService.objectGroup.currentRevision.objects)
+    //current revision aktuell provisorisch, da keine anderen verfügbar
+    this.objects_table_add = new MatTableDataSource(this.new_revision.objects.add)
+    this.objects_table_update = new MatTableDataSource(this.new_revision.objects.update)
+    this.objects_table_delete = new MatTableDataSource(this.new_revision.objects.delete)
+
+    this.displayedColumns_overview=["name", "description", "created", "actions"]
+    this.displayedColumns_add = ["name", "description", "created", "actions"]
+    this.displayedColumns_update = ["name", "description", "created", "actions"]
+    this.displayedColumns_delete = ["name", "description", "created", "actions"]
+
   }
 
   ngOnInit(): void {
@@ -56,7 +73,9 @@ export class CreateRevisionComponent implements OnInit {
       if (result) {
         console.log("Dialog closed: ", result)
         this.new_revision.objects.add.push(result)
-        this.objects_table = new MatTableDataSource(this.new_revision.objects.add)
+        this.objects_table_add = new MatTableDataSource(this.new_revision.objects.add)
+        this.objects_table_update = new MatTableDataSource(this.new_revision.objects.update)
+        this.objects_table_delete = new MatTableDataSource(this.new_revision.objects.delete)
         this.isValid()
       } else {
         console.log("Dialog dismissed")
