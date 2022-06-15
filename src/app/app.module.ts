@@ -62,6 +62,7 @@ import { ConfigDetailsDialogComponent } from './dialogs/config-details-dialog/co
 import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.component';
 import { RevisionOverviewComponent } from './revision-overview/revision-overview.component';
 import { CreateRevisionComponent } from './dialogs/create-revision/create-revision.component';
+import { ObjectsOverviewComponent } from './objects-overview/objects-overview.component';
 
 function initialize(http: HttpClient, config: ConfigService) {
 	return (): Promise<boolean> => {
@@ -116,6 +117,7 @@ export function storageFactory() : OAuthStorage {
     ErrorDialogComponent,
     RevisionOverviewComponent,
     CreateRevisionComponent,
+    ObjectsOverviewComponent,
   ],
   imports: [
     BrowserModule,

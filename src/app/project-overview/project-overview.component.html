@@ -153,6 +153,10 @@
                 color="primary" (click)="toObjectGroups(element)">
                 <mat-icon>arrow_forward</mat-icon>
             </button>
+            <button mat-icon-button #tooltip="matTooltip" matTooltip="See Objects" matTooltipPosition="above"
+                color="primary" (click)="toObjects(element)">
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
         </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

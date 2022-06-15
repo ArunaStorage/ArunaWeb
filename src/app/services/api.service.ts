@@ -511,6 +511,31 @@ export class ApiService {
       })
     })
   }
+
+  viewObjects(element) {
+    return new Promise(resolve => {
+      console.log(this.paginantor_config)
+      var post_object = { id: element.id, pageRequest: { lastUuid: "", pageSize: this.paginantor_config.pagesize.toString() } }
+      if (this.paginantor_config.activepage > 0) {
+        post_object.pageRequest.lastUuid = this.paginantor_config.lastIds[this.paginantor_config.activepage - 1]
+      }
+      this.http.post(this.gateway_url + "/datasetobjects/get", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
+        console.log(res)
+        this.formatObjGroup(res["objects"]).then(_ => {
+          resolve("")
+        }, err => {
+          console.log(err)
+          this.openErrorDialog(err)
+        }
+        )
+        
+        this.dataset = element
+
+        Object.assign(this.dataset,{formated_avg: this.formatNumber(this.dataset.stats.avgObjectSize), formated_acc: this.formatNumber(this.dataset.stats.accSize)})
+
+      })
+    })
+  }
   //Executes a http post request to get, format and return the details of the object group
   getObjectGroup(id) {
     return new Promise(resolve => {
@@ -598,6 +623,31 @@ export class ApiService {
       )
     })
   }
+
+  getObjectsPagination(element) {
+    return new Promise(resolve => {
+      var post_obj = { id: element.id }
+      console.log(post_obj)
+      this.http.post(this.gateway_url + "/datasetobjects/get", post_obj, this.configureHeadersAccessKey()).pipe().subscribe(res => {
+        console.log(res)
+
+        
+        for (let [i, object] of res["objects"].entries()) {
+          if (i % this.paginantor_config.pagesize == this.paginantor_config.pagesize - 1) {
+            console.log("last element", i, object)
+            this.paginantor_config.lastIds.push(object.id)
+          }
+        }
+        console.log(this.paginantor_config)
+        resolve("")
+      }, err => {
+        console.log(err)
+        this.openErrorDialog(err)
+      }
+      )
+    })
+  }
+
   /* viewSelectedObjectGroups(dataset_id,start_date, end_date){
      return new Promise(resolve => {
        var post_object = { id: dataset_id, start:start_date, end:end_date }

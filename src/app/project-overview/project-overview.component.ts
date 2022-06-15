@@ -146,6 +146,20 @@ export class ProjectOverviewComponent implements OnInit {
     })
   }
 
+  toObjects(element){  
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      hasBackdrop: true,
+      disableClose: true
+    })
+    console.log("See Objects..." , element)
+    this.apiService.getObjectsPagination(element).then(()=> {
+      this.apiService.viewObjects(element).then(()=> {
+      dialogRef.close()
+      this.router.navigate(["/objects_overview"])
+      })
+    })
+  }
+
  async refreshDatasets(){
   await this.apiService.viewSingleProject(this.apiService.project.project["id"])
   await this.apiService.getDatasetsforProject(this.apiService.project.project["id"])
