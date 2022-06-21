@@ -1,1 +1,58 @@
-<p>objects-overview works!</p>
+<mat-toolbar color="primary">
+    <button mat-icon-button color="secondary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>BioData DB - Objects Overview - Dataset: XXX </span>
+    <span class="example-spacer"></span>
+    <!--
+    <button
+        mat-icon-button
+        #tooltip="matTooltip" 
+        matTooltip="Endpoint URLs"
+        matTooltipPosition="below"
+        color="secondary"
+        (click)="openEndpoints()">
+        <mat-icon>build</mat-icon>
+    </button>
+    <button mat-raised-button color="secondary" (click)="openProfile()">
+        <mat-icon>person</mat-icon>
+        {{authService.user_data.preferred_username}}
+    </button>
+    -->
+</mat-toolbar>
+
+
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>
+            Stats about this Dataset
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <!--
+            <mat-list-item style="height: 40px;">
+                <mat-icon>bar_chart</mat-icon>
+                Number of Datasets: {{apiService.project.datasets.length}}
+            </mat-list-item>
+            <mat-list-item style="height: 40px;">
+                <mat-icon>bar_chart</mat-icon>
+                Number of Object Groups: {{apiService.project.project["stats"].objectGroupCount}}
+            </mat-list-item>
+            
+            <mat-list-item style="height: 40px;">
+                <mat-icon>bar_chart</mat-icon>
+                Number of Objects: {{apiService.project.project["stats"].objectCount}}
+            </mat-list-item>
+        -->
+            <mat-list-item style="height: 40px;">
+                <mat-label>
+                    The table below contains the Objects for the dataset XXX.
+                </mat-label>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)=newObject()>New Object</button>
+    </mat-card-actions>
+</mat-card>
