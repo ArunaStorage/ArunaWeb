@@ -25,6 +25,7 @@ export class ApiService {
   public obj_groups: []
   public objectGroup: any
   public objectGroupRevisions: any
+  public objects: any
   public paginantor_config = { stats: { groupscount: 0, objectscount: 0 }, lastIds: [], pagesize: 250, pagecount: 0, activepage: 0 }
   public paginantor_config_versions = { stats: { groupscount: 0, objectscount: 0 }, lastIds: [], pagesize: 250, pagecount: 0, activepage: 0 }
 
@@ -593,7 +594,6 @@ export class ApiService {
   }
 
 
-
   //Executes a http post request to get all object groups of a dataset to create the pagination config
   getObjectGroupPagination(element) {
     return new Promise(resolve => {
@@ -882,4 +882,21 @@ export class ApiService {
     this.sendNext(object, index)
   }
 
+  //pagination ab 627
+  getObjects(id){
+    return new Promise(resolve => {
+      var post_object = { id: id }
+      console.log(post_object)
+      this.http.post(this.gateway_url + "/datasetobjects/get", post_object, this.configureHeadersAccessKey()).pipe().subscribe(res => {
+        var formated_res = res["objects"]
+        console.log("formated_res:" , formated_res)
+        resolve(formated_res)
+      }, err => {
+        console.log(err)
+        this.openErrorDialog(err)
+      }
+      )
+    })
+  }
+  
 }

@@ -30,21 +30,12 @@
     </mat-card-header>
     <mat-card-content>
         <mat-list>
-            <!--
-            <mat-list-item style="height: 40px;">
-                <mat-icon>bar_chart</mat-icon>
-                Number of Datasets: {{apiService.project.datasets.length}}
-            </mat-list-item>
-            <mat-list-item style="height: 40px;">
-                <mat-icon>bar_chart</mat-icon>
-                Number of Object Groups: {{apiService.project.project["stats"].objectGroupCount}}
-            </mat-list-item>
-            
+            <!--            
             <mat-list-item style="height: 40px;">
                 <mat-icon>bar_chart</mat-icon>
                 Number of Objects: {{apiService.project.project["stats"].objectCount}}
             </mat-list-item>
-        -->
+            -->
             <mat-list-item style="height: 40px;">
                 <mat-label>
                     The table below contains the Objects for the dataset XXX.
@@ -56,3 +47,61 @@
         <button mat-raised-button color="primary" (click)=newObject()>New Object</button>
     </mat-card-actions>
 </mat-card>
+
+<table mat-table [dataSource]="objects_table" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Filename </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Filetype </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.filetype}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="filesize">
+        <th mat-header-cell *matHeaderCellDef> Filesize (Bytes)</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.contentLen}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.created | date: "dd. MMM yyyy, HH:mm.ss"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button #tooltip="matTooltip" matTooltip="{{element.status}}" matTooltipPosition="above"
+                [class]="element.status">
+                <mat-icon>circle</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <button [cdkCopyToClipboard]="element.id" mat-icon-button
+                #tooltip="matTooltip" matTooltip="Copy Object ID" matTooltipPosition="above"
+                color="primary"
+                (click)="openSnackBar()">
+                <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-icon-button #tooltip="matTooltip" matTooltip="Download File"
+                matTooltipPosition="above" color="primary"
+                (click)="downloadObject()">
+                <mat-icon>file_download</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
